@@ -465,10 +465,22 @@ function attachResizeHandler() {
     }, { passive: true });
 }
 
+function initInteractiveFooter() {
+    const voidBtn = document.getElementById('voidButton');
+    if (!voidBtn) return;
+
+    voidBtn.addEventListener('mousemove', (e) => {
+        const rect = voidBtn.getBoundingClientRect();
+        voidBtn.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        voidBtn.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    });
+}
+
 function init() {
     initInteractiveFeatures();
     buildIntroAnimations();
     buildScrollAnimations();
+    initInteractiveFooter();
     attachResizeHandler();
 }
 
