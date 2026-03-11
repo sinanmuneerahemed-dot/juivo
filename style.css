@@ -342,111 +342,87 @@ main {
     line-height: 1.7;
 }
 
-.panel--flavors {
-    background: linear-gradient(
-        to bottom,
-        transparent 0%,
-        rgba(10, 22, 14, 0.72) 24%,
-        rgba(10, 22, 14, 0.95) 100%
-    );
-}
-
-.section-head {
-    width: min(900px, 100%);
-    margin-inline: auto;
-    text-align: center;
-}
-
-.section-head h2 {
-    font-size: clamp(2.2rem, 8vw, 4.8rem);
-}
-
-.flavor-grid {
-    margin: 2rem auto 0;
-    width: min(1080px, 100%);
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: clamp(0.9rem, 2vw, 1.5rem);
-}
-
-.flavor-card {
+/* --- HORIZONTAL SHOWCASE --- */
+.horizontal-showcase {
+    height: 400vh; /* 4 slides length to scroll through */
     position: relative;
-    background: var(--panel-soft);
-    border: 1px solid var(--line);
-    border-radius: 1.2rem;
+    background: var(--ink);
+    z-index: 5;
+}
+
+.horizontal-sticky {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
     overflow: hidden;
-    transform: translateY(42px);
-    opacity: 0;
+    background: var(--ink);
 }
 
-.flavor-card {
-    text-align: left;
+.horizontal-track {
     display: flex;
-    flex-direction: column;
-}
-
-.bottle-container {
-    position: relative;
-    width: 100%;
-    height: 340px;
-    margin-bottom: 1rem;
-}
-
-.flavor-card img {
-    position: relative;
-    width: 100%;
+    width: 300vw; /* 3 slides @ 100vw each */
     height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
-    filter: saturate(1.12) contrast(1.03);
-    z-index: 2; /* Sit above the hidden tags */
-    border-radius: 8px;
-    box-shadow: 0 14px 44px rgba(0,0,0,0.15);
+    will-change: transform;
 }
 
-.ingredient-tag {
-    position: absolute;
-    top: 50%;
-    padding: 0.4rem 0.8rem;
-    background: rgba(255, 255, 255, 0.95);
-    color: var(--ink);
-    font-size: 0.72rem;
-    font-weight: 700;
+.h-slide {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    padding: clamp(2rem, 5vw, 6rem);
+    transition: background-color 0.5s ease;
+}
+
+.h-content {
+    flex: 1;
+    max-width: 600px;
+    z-index: 2;
+}
+
+.h-title {
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 0.9;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    border-radius: 99px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    pointer-events: none;
-    z-index: 1; /* Slide out from under the bottle */
-    opacity: 0;
-    transform: translateY(-50%) scale(0.8);
-    white-space: nowrap;
-}
-
-.ingredient-tag.tag-left {
-    left: -10%;
-}
-
-.ingredient-tag.tag-right {
-    right: -10%;
-}
-
-.flavor-copy {
-    padding: 1rem 1.1rem 1.2rem;
-}
-
-.flavor-copy h3 {
-    margin: 0;
     font-family: var(--heading-font);
-    font-size: 1.5rem;
+    margin: 0 0 1rem;
     letter-spacing: -0.02em;
 }
 
-.flavor-copy p {
-    margin: 0.38rem 0 0;
-    font-size: 0.95rem;
-    color: rgba(255, 247, 228, 0.87);
+.h-desc {
+    font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+    line-height: 1.4;
+    color: rgba(255, 247, 228, 0.88);
+    margin: 0 0 2rem;
+}
+
+.h-metric {
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 99px;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+}
+
+.h-image-wrap {
+    flex: 1;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.h-image-wrap img {
+    height: 85%;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
 }
 
 .panel--order {

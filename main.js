@@ -15,7 +15,6 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 const revealItems = gsap.utils.toArray('.reveal');
 const storySteps = gsap.utils.toArray('.story-step');
-const flavorCards = gsap.utils.toArray('.flavor-card');
 
 let resizeTimer = null;
 
@@ -23,7 +22,7 @@ let resizeTimer = null;
 function initInteractiveFeatures() {
     // 1. Custom Blend-Mode Cursor
     const cursor = document.getElementById('custom-cursor');
-    const interactiveElements = document.querySelectorAll('a, button, .story-step, .flavor-card, .scroll-hint');
+    const interactiveElements = document.querySelectorAll('a, button, .story-step, .h-slide, .scroll-hint');
     
     // Performance optimized mouse follower using GSAP quickTo
     if (cursor && !window.matchMedia("(hover: none)").matches) {
@@ -113,56 +112,41 @@ function initInteractiveFeatures() {
             }
         });
     }
-    // 4 & 5. Parallax Juice Bottles and Interactive Ingredient Reveals
-    const flavorContainers = document.querySelectorAll('.bottle-container');
-    const images = document.querySelectorAll('.flavor-card img');
-
-    if (flavorContainers.length > 0) {
-        // Subtle vertical parallax on the images themselves
-        images.forEach((img, i) => {
-            gsap.to(img, {
-                y: -40,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: img,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: 0.4
-                }
-            });
+    // 4. Horizontal Scene Apple-Style Scroll
+    const horizontalSection = document.getElementById('horizontal-showcase');
+    const horizontalTrack = document.getElementById('horizontal-track');
+    
+    if (horizontalSection && horizontalTrack) {
+        // Calculate the exact amount of x translation needed
+        const getScrollAmount = () => -(horizontalTrack.scrollWidth - window.innerWidth);
+        
+        let horizontalTween = gsap.to(horizontalTrack, {
+            x: getScrollAmount,
+            ease: "none",
+            scrollTrigger: {
+                trigger: horizontalSection,
+                start: "top top",
+                end: () => `+=${horizontalTrack.scrollWidth - window.innerWidth}`,
+                scrub: 1, // Smooth dampening
+                pin: true, // Locks the section in place while scrubbing
+                invalidateOnRefresh: true
+            }
         });
 
-        // Hover Tag reveals
-        flavorContainers.forEach((container) => {
-            const leftTag = container.querySelector('.tag-left');
-            const rightTag = container.querySelector('.tag-right');
-            
-            if (!leftTag || !rightTag) return;
-
-            // Expand tags out on hover
-            container.addEventListener('mouseenter', () => {
-                gsap.to([leftTag, rightTag], {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 0.6,
-                    ease: "back.out(2)"
+        // Change background color dynamically for each slide
+        const slides = gsap.utils.toArray('.h-slide');
+        slides.forEach((slide) => {
+            let bgColor = slide.getAttribute('data-bg');
+            if (bgColor) {
+                ScrollTrigger.create({
+                    trigger: slide,
+                    containerAnimation: horizontalTween,
+                    start: "left center",
+                    end: "right center",
+                    onEnter: () => gsap.to('.horizontal-sticky', { backgroundColor: bgColor, duration: 0.8, overwrite: "auto" }),
+                    onEnterBack: () => gsap.to('.horizontal-sticky', { backgroundColor: bgColor, duration: 0.8, overwrite: "auto" }),
                 });
-                gsap.to(leftTag, { x: -40, duration: 0.6, ease: "back.out(2)" });
-                gsap.to(rightTag, { x: 40, duration: 0.6, ease: "back.out(2)" });
-                gsap.to(container.querySelector('img'), { scale: 1.05, duration: 0.4, ease: "power2.out" });
-            });
-
-            // Retract perfectly back inside
-            container.addEventListener('mouseleave', () => {
-                gsap.to([leftTag, rightTag], {
-                    opacity: 0,
-                    scale: 0.8,
-                    x: 0,
-                    duration: 0.4,
-                    ease: "power2.in"
-                });
-                gsap.to(container.querySelector('img'), { scale: 1, duration: 0.4, ease: "power2.out" });
-            });
+            }
         });
     }
 }
