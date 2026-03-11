@@ -72,11 +72,33 @@ function initInteractiveFeatures() {
     const marqueeTrack = document.getElementById('marquee-track');
     if (marqueeTrack) {
         // We move it by half its total width since it contains two identical .marquee-content child elements side-by-side
-        gsap.to(marqueeTrack, {
+        const marqueeTween = gsap.to(marqueeTrack, {
             xPercent: -50,
             ease: "none",
             duration: 15,
             repeat: -1
+        });
+
+        // Speed it up based on scroll velocity!
+        ScrollTrigger.create({
+            start: 0,
+            end: "max",
+            onUpdate: (self) => {
+                // Grab the current scroll velocity (Math.abs handles both scrolling up and down)
+                let velocity = Math.abs(self.getVelocity());
+                
+                // Map high scroll speeds tightly (1.0 goes up to a max of 7x speed)
+                let targetTimeScale = 1 + (velocity / 250); 
+                targetTimeScale = Math.min(targetTimeScale, 7);
+
+                // Smoothly tween the timeScale, so it coasts back down to 1 naturally when scrolling stops
+                gsap.to(marqueeTween, {
+                    timeScale: targetTimeScale,
+                    duration: 0.6,
+                    ease: "power3.out",
+                    overwrite: "auto"
+                });
+            }
         });
     }
     // 4 & 5. Parallax Juice Bottles and Interactive Ingredient Reveals
