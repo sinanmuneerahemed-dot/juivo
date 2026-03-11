@@ -289,6 +289,7 @@ function buildScrollAnimations() {
 
             const lockScroll = () => {
                 if (!isHeroLocked) {
+                    if (window.lenis) window.lenis.stop();
                     document.body.style.overflow = 'hidden';
                     isHeroLocked = true;
                     hasCompletedVideo = false; // Reset completion state if we legitimately lock
@@ -297,6 +298,7 @@ function buildScrollAnimations() {
             
             const unlockScroll = () => {
                 if (isHeroLocked) {
+                    if (window.lenis) window.lenis.start();
                     document.body.style.overflow = '';
                     isHeroLocked = false;
                     hasCompletedVideo = true; // Mark as passed
@@ -476,7 +478,28 @@ function initInteractiveFooter() {
     });
 }
 
+function initLenis() {
+    window.lenis = new Lenis({
+        duration: 2.0, // Slow, extremely buttery scroll duration
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
+        direction: 'vertical',
+        gestureDirection: 'vertical',
+        smooth: true,
+        smoothTouch: false,
+        touchMultiplier: 2
+    });
+
+    window.lenis.on('scroll', ScrollTrigger.update);
+
+    gsap.ticker.add((time) => {
+        window.lenis.raf(time * 1000); // Connect GSAP ticker to Lenis requestAnimationFrame
+    });
+
+    gsap.ticker.lagSmoothing(0); // Prevent GSAP from overriding the smooth scroll delta
+}
+
 function init() {
+    initLenis();
     initInteractiveFeatures();
     buildIntroAnimations();
     buildScrollAnimations();
