@@ -14,7 +14,6 @@ const root = document.documentElement;
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const revealItems = gsap.utils.toArray('.reveal');
-const storySteps = gsap.utils.toArray('.story-step');
 
 let resizeTimer = null;
 
@@ -22,7 +21,7 @@ let resizeTimer = null;
 function initInteractiveFeatures() {
     // 1. Custom Blend-Mode Cursor
     const cursor = document.getElementById('custom-cursor');
-    const interactiveElements = document.querySelectorAll('a, button, .story-step, .h-slide, .scroll-hint');
+    const interactiveElements = document.querySelectorAll('a, button, .h-slide, .scroll-hint');
     
     // Performance optimized mouse follower using GSAP quickTo
     if (cursor && !window.matchMedia("(hover: none)").matches) {
@@ -436,54 +435,7 @@ function buildScrollAnimations() {
         }
     }
 
-    storySteps.forEach((step) => {
-        const tint = step.dataset.tint || 'rgba(255, 170, 61, 0.86)';
 
-        gsap.to(step, {
-            y: 0,
-            autoAlpha: 1,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: step,
-                start: 'top 72%',
-                end: 'top 42%',
-                scrub: scrubValue,
-                onEnter: () => setAccent(tint),
-                onEnterBack: () => setAccent(tint),
-                toggleClass: {
-                    targets: step,
-                    className: 'is-active'
-                }
-            }
-        });
-
-        gsap.to(step, {
-            y: -38,
-            autoAlpha: 0.2,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: step,
-                start: 'bottom 50%',
-                end: 'bottom 18%',
-                scrub: scrubValue,
-                onLeave: () => step.classList.remove('is-active'),
-                onLeaveBack: () => step.classList.remove('is-active')
-            }
-        });
-    });
-
-    gsap.to(flavorCards, {
-        y: 0,
-        autoAlpha: 1,
-        duration: 0.9,
-        stagger: 0.14,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '.panel--flavors',
-            start: 'top 72%',
-            once: true
-        }
-    });
 
     gsap.from('.order-card', {
         y: 48,

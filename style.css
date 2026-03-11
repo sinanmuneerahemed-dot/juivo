@@ -290,57 +290,7 @@ main {
     z-index: 2;
 }
 
-.sequence-track {
-    min-height: 420vh;
-    padding-inline: clamp(1rem, 4vw, 2rem);
-    display: grid;
-    align-content: start;
-}
 
-.story-step {
-    width: min(600px, 100%);
-    margin-inline: auto;
-    margin-top: 18vh;
-    padding: clamp(1.2rem, 2.2vw, 2rem);
-    border: 1px solid var(--line);
-    border-radius: 1.35rem;
-    background: var(--panel);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.36);
-    opacity: 0.24;
-    transform: translateY(52px);
-}
-
-.story-step + .story-step {
-    margin-top: 72vh;
-}
-
-.story-step.is-active {
-    border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
-    box-shadow: 0 26px 85px color-mix(in srgb, var(--accent) 22%, rgba(0, 0, 0, 0.55));
-}
-
-.step-kicker {
-    margin: 0 0 0.6rem;
-    font-family: var(--heading-font);
-    font-size: 0.84rem;
-    letter-spacing: 0.2em;
-    color: color-mix(in srgb, var(--accent) 72%, var(--cream));
-}
-
-.step-title {
-    margin: 0;
-    font-family: var(--heading-font);
-    font-size: clamp(1.6rem, 4vw, 2.7rem);
-    line-height: 1.03;
-}
-
-.step-copy {
-    margin: 0.85rem 0 0;
-    color: rgba(255, 247, 228, 0.88);
-    font-size: 1rem;
-    line-height: 1.7;
-}
 
 /* --- HORIZONTAL SHOWCASE --- */
 .horizontal-showcase {
