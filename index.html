@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUIVO | Scroll Fresh</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="sequence-bg" aria-hidden="true">
+        <div class="bg-layer bg-layer--vignette"></div>
+        <div class="bg-layer bg-layer--mesh"></div>
+    </div>
+
+    <header class="site-header">
+        <a class="logo" href="#hero">JUIVO</a>
+        <p class="header-tag">Cold-Pressed Fruit Craft</p>
+        <a class="header-cta" href="#order">Order Pack</a>
+    </header>
+
+    <main>
+        <section class="panel panel--hero" id="hero">
+            <div class="hero-sticky">
+                <canvas id="hero-canvas"></canvas>
+                <!-- Visually hidden video used only as a source for the canvas -->
+                <video id="hero-video" src="/assets/vedio_scrub.mp4" playsinline muted preload="auto" style="position: absolute; opacity: 0.01; pointer-events: none; z-index: -2;"></video>
+                <div class="panel-inner">
+                    <p class="eyebrow reveal">Fresh Splash Series</p>
+                    <h1 class="reveal">Twist. Pour. <span>Glow.</span></h1>
+                    <p class="lead reveal">
+                        Scroll to move through the JUIVO bottle sequence.
+                        The page is tuned for smooth, cinematic motion.
+                    </p>
+                </div>
+                <p class="scroll-hint">Scroll to animate</p>
+            </div>
+        </section>
+
+        <section class="sequence-track" id="sequence-track">
+            <article class="story-step" data-tint="rgba(255, 170, 61, 0.86)">
+                <p class="step-kicker">01</p>
+                <h2 class="step-title">Pressed at peak sweetness</h2>
+                <p class="step-copy">
+                    We harvest fruit at peak ripeness and press in small batches
+                    for bright flavor and natural color.
+                </p>
+            </article>
+
+            <article class="story-step" data-tint="rgba(255, 123, 76, 0.86)">
+                <p class="step-kicker">02</p>
+                <h2 class="step-title">Swirl built from real fruit pulp</h2>
+                <p class="step-copy">
+                    Every bottle keeps texture and aroma, so each sip feels alive
+                    and full-bodied from first pour to final drop.
+                </p>
+            </article>
+
+            <article class="story-step" data-tint="rgba(254, 84, 124, 0.86)">
+                <p class="step-kicker">03</p>
+                <h2 class="step-title">No synthetic aftertaste</h2>
+                <p class="step-copy">
+                    No fake colors, no heavy syrups. Just vibrant fruit with a clean,
+                    crisp finish that stays refreshing.
+                </p>
+            </article>
+
+            <article class="story-step" data-tint="rgba(115, 255, 120, 0.86)">
+                <p class="step-kicker">04</p>
+                <h2 class="step-title">Ready for your daily ritual</h2>
+                <p class="step-copy">
+                    Morning fuel, midday reset, or post-workout restore, JUIVO
+                    keeps your routine tasting fresh.
+                </p>
+            </article>
+        </section>
+
+        <section class="panel panel--flavors" id="flavors">
+            <div class="section-head">
+                <p class="eyebrow">Three Signature Blends</p>
+                <h2>Choose your daily flavor.</h2>
+            </div>
+
+            <div class="flavor-grid">
+                <article class="flavor-card">
+                    <img src="/assets/mango.jpg" alt="JUIVO mango juice bottle">
+                    <div class="flavor-copy">
+                        <h3>Mango Burst</h3>
+                        <p>Silky, sun-ripe, naturally sweet.</p>
+                    </div>
+                </article>
+
+                <article class="flavor-card">
+                    <img src="/assets/strawberry.jpg" alt="JUIVO strawberry juice bottle">
+                    <div class="flavor-copy">
+                        <h3>Strawberry Spark</h3>
+                        <p>Soft berry aroma with bright finish.</p>
+                    </div>
+                </article>
+
+                <article class="flavor-card">
+                    <img src="/assets/grape.jpg" alt="JUIVO grape juice bottle">
+                    <div class="flavor-copy">
+                        <h3>Grape Rush</h3>
+                        <p>Deep fruit notes and clean crispness.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="panel panel--order" id="order">
+            <div class="order-card">
+                <p class="eyebrow">Launch Offer</p>
+                <h2>Get the JUIVO Trio Pack</h2>
+                <p>Three flavors. One chilled box. Delivered fresh to your doorstep.</p>
+                <a href="#hero" class="order-link">Shop JUIVO</a>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
