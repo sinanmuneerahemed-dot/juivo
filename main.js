@@ -161,8 +161,6 @@ function setAccent(tint) {
 }
 
 function buildIntroAnimations() {
-    gsap.set(flavorCards, { y: 42, autoAlpha: 0 });
-
     const intro = gsap.timeline({
         defaults: {
             ease: 'power3.out'
