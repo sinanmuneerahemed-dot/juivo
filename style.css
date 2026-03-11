@@ -361,7 +361,7 @@ main {
 
 .h-image-wrap {
     flex: 1;
-    height: 80%;
+    height: 95%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -375,7 +375,7 @@ main {
 }
 
 .h-image-wrap img {
-    height: 85%;
+    height: 110%;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
