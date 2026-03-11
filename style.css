@@ -178,7 +178,7 @@ main {
     position: relative;
     width: 100%;
     overflow: hidden;
-    padding: 4rem 0;
+    padding: 1.5rem 0; /* Reduced padding from 4rem to 1.5rem */
     background: var(--ink);
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
@@ -198,7 +198,7 @@ main {
 
 .marquee-content span {
     font-family: var(--heading-font);
-    font-size: clamp(4rem, 8vw, 8rem);
+    font-size: clamp(1.8rem, 4vw, 3rem); /* Halved the font size */
     font-weight: 800;
     text-transform: uppercase;
     color: transparent;
