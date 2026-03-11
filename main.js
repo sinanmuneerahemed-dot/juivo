@@ -71,7 +71,6 @@ function initInteractiveFeatures() {
     // 3. Infinite Scrolling Marquee Text
     const marqueeTrack = document.getElementById('marquee-track');
     if (marqueeTrack) {
-        // We move it by half its total width since it contains two identical .marquee-content child elements side-by-side
         const marqueeTween = gsap.to(marqueeTrack, {
             xPercent: -50,
             ease: "none",
@@ -79,25 +78,38 @@ function initInteractiveFeatures() {
             repeat: -1
         });
 
-        // Speed it up based on scroll velocity!
+        let scrollDecayTimeout;
+
         ScrollTrigger.create({
             start: 0,
             end: "max",
             onUpdate: (self) => {
-                // Grab the current scroll velocity (Math.abs handles both scrolling up and down)
                 let velocity = Math.abs(self.getVelocity());
                 
-                // Map high scroll speeds tightly (1.0 goes up to a max of 7x speed)
-                let targetTimeScale = 1 + (velocity / 250); 
-                targetTimeScale = Math.min(targetTimeScale, 7);
+                // Gentler speed burst (max 3.5x speed)
+                let targetTimeScale = 1 + (velocity / 400); 
+                targetTimeScale = Math.min(targetTimeScale, 3.5);
 
-                // Smoothly tween the timeScale, so it coasts back down to 1 naturally when scrolling stops
                 gsap.to(marqueeTween, {
                     timeScale: targetTimeScale,
-                    duration: 0.6,
-                    ease: "power3.out",
+                    duration: 0.3, // Quicker response to speed up
+                    ease: "power2.out",
                     overwrite: "auto"
                 });
+
+                // Clear any existing decay timeout
+                clearTimeout(scrollDecayTimeout);
+                
+                // Wait just 100ms after the last scroll event, then aggressively pull speed back to normal (1x)
+                // This prevents the "infinite" stuck speed bug if the user abruptly stops scrolling.
+                scrollDecayTimeout = setTimeout(() => {
+                    gsap.to(marqueeTween, {
+                        timeScale: 1,
+                        duration: 0.8, // Smoothly coast down for almost a second
+                        ease: "power3.out",
+                        overwrite: "auto"
+                    });
+                }, 100);
             }
         });
     }
