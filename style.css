@@ -368,11 +368,20 @@ main {
     z-index: 1;
 }
 
+@keyframes floatBottle {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-24px) rotate(2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
 .h-image-wrap img {
     height: 85%;
     width: auto;
     object-fit: contain;
     filter: drop-shadow(0 40px 60px rgba(0,0,0,0.6));
+    animation: floatBottle 6.5s ease-in-out infinite;
+    transform-origin: center center;
+    will-change: transform, filter;
 }
 
 .panel--order {

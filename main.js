@@ -136,16 +136,48 @@ function initInteractiveFeatures() {
         const slides = gsap.utils.toArray('.h-slide');
         slides.forEach((slide) => {
             let bgColor = slide.getAttribute('data-bg');
+            let img = slide.querySelector('.h-image-wrap img');
+            
             if (bgColor) {
+                // Determine glow color (hex + 80 opacity for intense premium glow)
+                let shadowColor = bgColor + '80';
+                
                 ScrollTrigger.create({
                     trigger: slide,
                     containerAnimation: horizontalTween,
                     start: "left center",
                     end: "right center",
-                    onEnter: () => gsap.to('.horizontal-sticky', { backgroundColor: bgColor, duration: 0.8, overwrite: "auto" }),
-                    onEnterBack: () => gsap.to('.horizontal-sticky', { backgroundColor: bgColor, duration: 0.8, overwrite: "auto" }),
+                    onEnter: () => {
+                        gsap.to('.horizontal-sticky', { backgroundColor: bgColor, duration: 0.8, overwrite: "auto" });
+                        gsap.to(img, { filter: `drop-shadow(0 40px 80px ${shadowColor})`, scale: 1.05, duration: 0.8, overwrite: "auto" });
+                    },
+                    onEnterBack: () => {
+                        gsap.to('.horizontal-sticky', { backgroundColor: bgColor, duration: 0.8, overwrite: "auto" });
+                        gsap.to(img, { filter: `drop-shadow(0 40px 80px ${shadowColor})`, scale: 1.05, duration: 0.8, overwrite: "auto" });
+                    },
+                    onLeave: () => {
+                        gsap.to(img, { filter: `drop-shadow(0 20px 40px rgba(0,0,0,0.4))`, scale: 1, duration: 0.8, overwrite: "auto" });
+                    },
+                    onLeaveBack: () => {
+                        gsap.to(img, { filter: `drop-shadow(0 20px 40px rgba(0,0,0,0.4))`, scale: 1, duration: 0.8, overwrite: "auto" });
+                    }
                 });
             }
+        });
+
+        // 3D Parallax Effect: Make images move at a slightly different speed horizontally than the text
+        const images = gsap.utils.toArray('.h-image-wrap img');
+        images.forEach(img => {
+            gsap.to(img, {
+                xPercent: 35, // Delays the bottle's horizontal movement slightly
+                ease: "none",
+                scrollTrigger: {
+                    trigger: horizontalSection,
+                    start: "top top",
+                    end: () => `+=${horizontalTrack.scrollWidth - window.innerWidth}`,
+                    scrub: 1
+                }
+            });
         });
     }
 }
