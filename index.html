@@ -10,6 +10,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
     <div class="sequence-bg" aria-hidden="true">
         <div class="bg-layer bg-layer--vignette"></div>
         <div class="bg-layer bg-layer--mesh"></div>
@@ -36,6 +39,27 @@
                     </p>
                 </div>
                 <p class="scroll-hint">Scroll to animate</p>
+            </div>
+        </section>
+
+        <!-- Infinite Marquee Text -->
+        <section class="marquee-section">
+            <div class="marquee-track" id="marquee-track">
+                <div class="marquee-content">
+                    <span>✦ 100% ORGANIC</span>
+                    <span>✦ NO ADDED SUGAR</span>
+                    <span>✦ COLD-PRESSED</span>
+                    <span>✦ LOCALLY SOURCED</span>
+                    <span>✦ RAW & PURE</span>
+                </div>
+                <!-- Duplicate for seamless looping -->
+                <div class="marquee-content" aria-hidden="true">
+                    <span>✦ 100% ORGANIC</span>
+                    <span>✦ NO ADDED SUGAR</span>
+                    <span>✦ COLD-PRESSED</span>
+                    <span>✦ LOCALLY SOURCED</span>
+                    <span>✦ RAW & PURE</span>
+                </div>
             </div>
         </section>
 
@@ -85,7 +109,11 @@
 
             <div class="flavor-grid">
                 <article class="flavor-card">
-                    <img src="/assets/mango.jpg" alt="JUIVO mango juice bottle">
+                    <div class="bottle-container">
+                        <img src="/assets/mango.jpg" alt="JUIVO mango juice bottle">
+                        <div class="ingredient-tag tag-left">Alphonso Mango</div>
+                        <div class="ingredient-tag tag-right">Wild Mint</div>
+                    </div>
                     <div class="flavor-copy">
                         <h3>Mango Burst</h3>
                         <p>Silky, sun-ripe, naturally sweet.</p>
@@ -93,7 +121,11 @@
                 </article>
 
                 <article class="flavor-card">
-                    <img src="/assets/strawberry.jpg" alt="JUIVO strawberry juice bottle">
+                    <div class="bottle-container">
+                        <img src="/assets/strawberry.jpg" alt="JUIVO strawberry juice bottle">
+                        <div class="ingredient-tag tag-left">Red Berry</div>
+                        <div class="ingredient-tag tag-right">Citrus Zest</div>
+                    </div>
                     <div class="flavor-copy">
                         <h3>Strawberry Spark</h3>
                         <p>Soft berry aroma with bright finish.</p>
@@ -101,7 +133,11 @@
                 </article>
 
                 <article class="flavor-card">
-                    <img src="/assets/grape.jpg" alt="JUIVO grape juice bottle">
+                    <div class="bottle-container">
+                        <img src="/assets/grape.jpg" alt="JUIVO grape juice bottle">
+                        <div class="ingredient-tag tag-left">Concord Grape</div>
+                        <div class="ingredient-tag tag-right">Green Apple</div>
+                    </div>
                     <div class="flavor-copy">
                         <h3>Grape Rush</h3>
                         <p>Deep fruit notes and clean crispness.</p>

@@ -19,6 +19,120 @@ const flavorCards = gsap.utils.toArray('.flavor-card');
 
 let resizeTimer = null;
 
+// Premium Interactive Features init
+function initInteractiveFeatures() {
+    // 1. Custom Blend-Mode Cursor
+    const cursor = document.getElementById('custom-cursor');
+    const interactiveElements = document.querySelectorAll('a, button, .story-step, .flavor-card, .scroll-hint');
+    
+    // Performance optimized mouse follower using GSAP quickTo
+    if (cursor && !window.matchMedia("(hover: none)").matches) {
+        let xTo = gsap.quickTo(cursor, "x", {duration: 0.15, ease: "power3"});
+        let yTo = gsap.quickTo(cursor, "y", {duration: 0.15, ease: "power3"});
+
+        window.addEventListener("mousemove", e => {
+            xTo(e.clientX);
+            yTo(e.clientY);
+        });
+
+        // Add hover expanding state to all interactive elements
+        interactiveElements.forEach(el => {
+            el.addEventListener("mouseenter", () => cursor.classList.add("is-hovering"));
+            el.addEventListener("mouseleave", () => cursor.classList.remove("is-hovering"));
+        });
+    }
+
+    // 2. Magnetic CTA Buttons
+    const ctaButton = document.querySelector('.header-cta');
+    if (ctaButton && !window.matchMedia("(hover: none)").matches) {
+        ctaButton.addEventListener("mousemove", function(e) {
+            const position = ctaButton.getBoundingClientRect();
+            const x = e.clientX - position.left - position.width / 2;
+            const y = e.clientY - position.top - position.height / 2;
+
+            gsap.to(ctaButton, {
+                x: x * 0.35, 
+                y: y * 0.35, 
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+
+        ctaButton.addEventListener("mouseleave", function() {
+            gsap.to(ctaButton, {
+                x: 0, 
+                y: 0, 
+                duration: 0.7,
+                ease: "elastic.out(1, 0.3)"
+            });
+        });
+    }
+
+    // 3. Infinite Scrolling Marquee Text
+    const marqueeTrack = document.getElementById('marquee-track');
+    if (marqueeTrack) {
+        // We move it by half its total width since it contains two identical .marquee-content child elements side-by-side
+        gsap.to(marqueeTrack, {
+            xPercent: -50,
+            ease: "none",
+            duration: 15,
+            repeat: -1
+        });
+    }
+    // 4 & 5. Parallax Juice Bottles and Interactive Ingredient Reveals
+    const flavorContainers = document.querySelectorAll('.bottle-container');
+    const images = document.querySelectorAll('.flavor-card img');
+
+    if (flavorContainers.length > 0) {
+        // Subtle vertical parallax on the images themselves
+        images.forEach((img, i) => {
+            gsap.to(img, {
+                y: -40,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: img,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 0.4
+                }
+            });
+        });
+
+        // Hover Tag reveals
+        flavorContainers.forEach((container) => {
+            const leftTag = container.querySelector('.tag-left');
+            const rightTag = container.querySelector('.tag-right');
+            
+            if (!leftTag || !rightTag) return;
+
+            // Expand tags out on hover
+            container.addEventListener('mouseenter', () => {
+                gsap.to([leftTag, rightTag], {
+                    opacity: 1,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "back.out(2)"
+                });
+                gsap.to(leftTag, { x: -40, duration: 0.6, ease: "back.out(2)" });
+                gsap.to(rightTag, { x: 40, duration: 0.6, ease: "back.out(2)" });
+                gsap.to(container.querySelector('img'), { scale: 1.05, duration: 0.4, ease: "power2.out" });
+            });
+
+            // Retract perfectly back inside
+            container.addEventListener('mouseleave', () => {
+                gsap.to([leftTag, rightTag], {
+                    opacity: 0,
+                    scale: 0.8,
+                    x: 0,
+                    duration: 0.4,
+                    ease: "power2.in"
+                });
+                gsap.to(container.querySelector('img'), { scale: 1, duration: 0.4, ease: "power2.out" });
+            });
+        });
+    }
+}
+
 function setAccent(tint) {
     gsap.to(root, {
         '--accent': tint,
@@ -360,6 +474,7 @@ function attachResizeHandler() {
 }
 
 function init() {
+    initInteractiveFeatures();
     buildIntroAnimations();
     buildScrollAnimations();
     attachResizeHandler();

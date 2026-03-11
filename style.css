@@ -26,6 +26,7 @@ body {
     font-family: var(--body-font);
     color: var(--cream);
     overflow-x: clip; /* clip prevents horizontal scrollbars without breaking position: sticky */
+    cursor: none; /* Hide default cursor */
     background:
         radial-gradient(circle at 12% 14%, rgba(255, 180, 108, 0.5), transparent 48%),
         radial-gradient(circle at 85% 80%, rgba(106, 214, 115, 0.34), transparent 50%),
@@ -42,6 +43,38 @@ a {
     inset: 0;
     z-index: -5;
     overflow: hidden;
+}
+
+/* --- CUSTOM CURSOR --- */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--cream);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transform: translate(-50%, -50%); /* Center on mouse */
+    transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+}
+
+.custom-cursor.is-hovering {
+    width: 60px;
+    height: 60px;
+    background-color: var(--accent);
+}
+
+/* Disable custom cursor on touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .custom-cursor {
+        display: none;
+    }
+    body {
+        cursor: auto;
+    }
 }
 
 .bg-layer {
@@ -138,6 +171,46 @@ main {
     padding: 0;
     display: block;
     position: relative;
+}
+
+/* --- INFINITE MARQUEE --- */
+.marquee-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 4rem 0;
+    background: var(--ink);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    z-index: 6; /* sit above background but behind cards */
+}
+
+.marquee-track {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+}
+
+.marquee-content {
+    display: flex;
+    padding-right: 2rem;
+}
+
+.marquee-content span {
+    font-family: var(--heading-font);
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--line);
+    margin-right: 2rem;
+    letter-spacing: 0.05em;
+    transition: color 0.3s ease, -webkit-text-stroke 0.3s ease;
+}
+
+.marquee-content span:hover {
+    color: var(--accent);
+    -webkit-text-stroke: 1px transparent;
 }
 
 .hero-sticky {
@@ -306,13 +379,57 @@ main {
     opacity: 0;
 }
 
-.flavor-card img {
+.flavor-card {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.bottle-container {
+    position: relative;
     width: 100%;
     height: 340px;
+    margin-bottom: 1rem;
+}
+
+.flavor-card img {
+    position: relative;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     object-position: center;
     display: block;
     filter: saturate(1.12) contrast(1.03);
+    z-index: 2; /* Sit above the hidden tags */
+    border-radius: 8px;
+    box-shadow: 0 14px 44px rgba(0,0,0,0.15);
+}
+
+.ingredient-tag {
+    position: absolute;
+    top: 50%;
+    padding: 0.4rem 0.8rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--ink);
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 99px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    pointer-events: none;
+    z-index: 1; /* Slide out from under the bottle */
+    opacity: 0;
+    transform: translateY(-50%) scale(0.8);
+    white-space: nowrap;
+}
+
+.ingredient-tag.tag-left {
+    left: -10%;
+}
+
+.ingredient-tag.tag-right {
+    right: -10%;
 }
 
 .flavor-copy {
