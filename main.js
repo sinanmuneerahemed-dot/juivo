@@ -241,7 +241,6 @@ function buildScrollAnimations() {
 
         const setupVideoSync = () => {
             setupCanvasSize();
-            drawFrame(); // Draw initial frame
 
             // Create a render loop that constantly paints whichever frame the video is currently on
             const renderLoop = () => {
@@ -254,8 +253,12 @@ function buildScrollAnimations() {
             };
             requestAnimationFrame(renderLoop);
             
-            // Prime the video
-            video.currentTime = 0;
+            // Prime the video and wait for seek to finish before drawing first frame
+            video.addEventListener('seeked', () => {
+                drawFrame(); 
+            }, { once: true });
+            
+            video.currentTime = 0.01; // Avoid strict zero to guarantee a frame
             video.loop = false;
             video.playbackRate = 1.75; // Speed up the video playback slightly
             video.pause();
