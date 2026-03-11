@@ -29,8 +29,8 @@
             <div class="hero-sticky">
                 <canvas id="hero-canvas"></canvas>
                 <!-- Visually hidden video used only as a source for the canvas. 
-                     Moved completely off-screen to avoid visual bleed while keeping the decoding stream alive. -->
-                <video id="hero-video" src="/assets/vedio_scrub.mp4" playsinline muted preload="auto" style="position: absolute; top: -9999px; left: -9999px; opacity: 0.01; pointer-events: none; z-index: -99;"></video>
+                     Must remain physically on-screen and non-zero dimensioned to prevent the browser from suspending decoding. -->
+                <video id="hero-video" src="/assets/vedio_scrub.mp4" playsinline muted preload="auto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.001; pointer-events: none; z-index: -99;"></video>
                 <div class="panel-inner">
                     <p class="eyebrow reveal">Fresh Splash Series</p>
                     <h1 class="reveal">Twist. Pour. <span>Glow.</span></h1>
