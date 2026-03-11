@@ -454,19 +454,6 @@ function buildScrollAnimations() {
         }
     }
 
-
-
-    gsap.from('.order-card', {
-        y: 48,
-        autoAlpha: 0,
-        duration: 1,
-        ease: 'power3.out',
-        scrollTrigger: {
-            trigger: '#order',
-            start: 'top 80%',
-            once: true
-        }
-    });
 }
 
 function attachResizeHandler() {
