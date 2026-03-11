@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JUIVO | Scroll Fresh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+  <script type="module" crossorigin src="/assets/index-XBOtjL04.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-AtZUA30u.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="custom-cursor" id="custom-cursor"></div>
+
+    <div class="sequence-bg" aria-hidden="true">
+        <div class="bg-layer bg-layer--vignette"></div>
+        <div class="bg-layer bg-layer--mesh"></div>
+    </div>
+
+    <header class="site-header">
+        <a class="logo" href="#hero">JUIVO</a>
+        <p class="header-tag">Cold-Pressed Fruit Craft</p>
+        <a class="header-cta" href="#order">Order Pack</a>
+    </header>
+
+    <main>
+        <section class="panel panel--hero" id="hero">
+            <div class="hero-sticky">
+                <canvas id="hero-canvas"></canvas>
+                <!-- Visually hidden video used only as a source for the canvas -->
+                <video id="hero-video" src="/assets/vedio_scrub.mp4" playsinline muted preload="auto" style="position: absolute; opacity: 0.01; pointer-events: none; z-index: -2;"></video>
+                <div class="panel-inner">
+                    <p class="eyebrow reveal">Fresh Splash Series</p>
+                    <h1 class="reveal">Twist. Pour. <span>Glow.</span></h1>
+                    <p class="lead reveal">
+                        Scroll to move through the JUIVO bottle sequence.
+                        The page is tuned for smooth, cinematic motion.
+                    </p>
+                </div>
+                <p class="scroll-hint">Scroll to animate</p>
+            </div>
+        </section>
+
+        <!-- Infinite Marquee Text -->
+        <section class="marquee-section">
+            <div class="marquee-track" id="marquee-track">
+                <div class="marquee-content">
+                    <span>✦ 100% ORGANIC</span>
+                    <span>✦ NO ADDED SUGAR</span>
+                    <span>✦ COLD-PRESSED</span>
+                    <span>✦ LOCALLY SOURCED</span>
+                    <span>✦ RAW & PURE</span>
+                </div>
+                <!-- Duplicate for seamless looping -->
+                <div class="marquee-content" aria-hidden="true">
+                    <span>✦ 100% ORGANIC</span>
+                    <span>✦ NO ADDED SUGAR</span>
+                    <span>✦ COLD-PRESSED</span>
+                    <span>✦ LOCALLY SOURCED</span>
+                    <span>✦ RAW & PURE</span>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="horizontal-showcase" id="horizontal-showcase">
+            <div class="horizontal-sticky">
+                <div class="horizontal-track" id="horizontal-track">
+                    <!-- Slide 1: Mango -->
+                    <article class="h-slide" data-bg="#ffaa3d">
+                        <div class="h-content">
+                            <h2 class="h-title">Mango<br>Burst</h2>
+                            <p class="h-desc">Alphonso mangoes layered with wild mint. Silky, sun-ripe, and naturally sweet.</p>
+                            <span class="h-metric">100% RAW</span>
+                        </div>
+                        <div class="h-image-wrap">
+                            <img src="/assets/mango bg .jpg" alt="JUIVO mango juice bottle">
+                        </div>
+                    </article>
+
+                    <!-- Slide 2: Strawberry -->
+                    <article class="h-slide" data-bg="#fe547c">
+                        <div class="h-content">
+                            <h2 class="h-title">Strawberry<br>Spark</h2>
+                            <p class="h-desc">Soft berry aromas finished with a bright citrus twist. Pure liquid sunshine.</p>
+                            <span class="h-metric">NO ADDED SUGAR</span>
+                        </div>
+                        <div class="h-image-wrap">
+                            <img src="/assets/strawberry bg.jpg" alt="JUIVO strawberry juice bottle">
+                        </div>
+                    </article>
+
+                    <!-- Slide 3: Grape -->
+                    <article class="h-slide" data-bg="#8338ec">
+                        <div class="h-content">
+                            <h2 class="h-title">Grape<br>Rush</h2>
+                            <p class="h-desc">Deep Concord grape notes elevated with crisp, tart green apple.</p>
+                            <span class="h-metric">COLD PRESSED</span>
+                        </div>
+                        <div class="h-image-wrap">
+                            <img src="/assets/grape bg.jpg" alt="JUIVO grape juice bottle">
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <footer class="final-void">
+            <a href="#hero" class="void-button" id="voidButton">
+                <div class="void-glow" id="voidGlow"></div>
+                <div class="void-content">
+                    <span class="void-metric">LAUNCH OFFER</span>
+                    <h2 class="void-title">TASTE THE<br>PUREST DROP</h2>
+                    <span class="void-subtext">Shop the Trio Pack</span>
+                </div>
+            </a>
+        </footer>
+    </main>
+
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+</body>
+</html>
