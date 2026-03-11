@@ -7,8 +7,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-CDJdq1OB.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-CK0Hfc2T.css">
+  <script type="module" crossorigin src="/assets/index-BGzag7pb.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-IEvnLXCC.css">
 </head>
 <body>
     <div class="sequence-bg" aria-hidden="true">
@@ -25,7 +25,9 @@
     <main>
         <section class="panel panel--hero" id="hero">
             <div class="hero-sticky">
-                <video id="hero-video" src="/assets/vedio.mp4" playsinline muted preload="auto"></video>
+                <canvas id="hero-canvas"></canvas>
+                <!-- Visually hidden video used only as a source for the canvas -->
+                <video id="hero-video" src="/assets/vedio_scrub.mp4" playsinline muted preload="auto" style="position: absolute; opacity: 0.01; pointer-events: none; z-index: -2;"></video>
                 <div class="panel-inner">
                     <p class="eyebrow reveal">Fresh Splash Series</p>
                     <h1 class="reveal">Twist. Pour. <span>Glow.</span></h1>
