@@ -247,11 +247,14 @@ function buildScrollAnimations() {
             // and we want to unlock them if they manage to scroll past it (either up or down).
             
             let isHeroLocked = false;
+            let hasCompletedVideo = false; // Add flag so we don't re-lock instantly
+            let heroUnlockTime = 0;
 
             const lockScroll = () => {
                 if (!isHeroLocked) {
                     document.body.style.overflow = 'hidden';
                     isHeroLocked = true;
+                    hasCompletedVideo = false; // Reset completion state if we legitimately lock
                 }
             };
             
@@ -259,6 +262,8 @@ function buildScrollAnimations() {
                 if (isHeroLocked) {
                     document.body.style.overflow = '';
                     isHeroLocked = false;
+                    hasCompletedVideo = true; // Mark as passed
+                    heroUnlockTime = Date.now();
                 }
             };
 
@@ -310,6 +315,16 @@ function buildScrollAnimations() {
                 entries.forEach(entry => {
                     // Lock if the hero is mostly taking up the screen
                     if (entry.isIntersecting && entry.intersectionRatio > 0.8) {
+                        // Prevent re-locking instantly right after they just unlocked
+                        if (hasCompletedVideo && (Date.now() - heroUnlockTime < 1500)) {
+                            return; // Let them scroll away!
+                        }
+
+                        // Also don't lock if they are trying to scroll AWAY after completing
+                        if (hasCompletedVideo && entry.intersectionRatio < 1.0) {
+                            return; 
+                        }
+
                         lockScroll();
                         
                         // Force a scroll to exactly top 0 so it's perfectly framed
