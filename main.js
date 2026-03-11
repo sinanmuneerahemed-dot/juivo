@@ -165,20 +165,7 @@ function initInteractiveFeatures() {
             }
         });
 
-        // 3D Parallax Effect: Make images move at a slightly different speed horizontally than the text
-        const images = gsap.utils.toArray('.h-image-wrap img');
-        images.forEach(img => {
-            gsap.to(img, {
-                xPercent: 35, // Delays the bottle's horizontal movement slightly
-                ease: "none",
-                scrollTrigger: {
-                    trigger: horizontalSection,
-                    start: "top top",
-                    end: () => `+=${horizontalTrack.scrollWidth - window.innerWidth}`,
-                    scrub: 1
-                }
-            });
-        });
+
     }
 }
 
